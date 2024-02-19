@@ -46,13 +46,16 @@ Esta configurado para correr en local y podra explorar los requerimientos del de
 
 Algunas de las funcionalidades que encontrara:
 
+Se conecta a la api pokeApi
 Lista de todos los pokemon con informacion relevante, tipo o tipos y colores de acerdo a su tipo.
+La lista contiene mas de los mil pokemon que contiene, el scroll es vertical y a medida que baja se ira cargando la información con nuevos pokemon dinamicamente.
 POPup al seleccionar un pokemon, encontrara ademas informacion del area donde se encuentra para capturarlo.
 Diagramas para visualizar que cantidad de pokemon hay por cada tipo.
 
 Se realizo una arquitectura limpia, donde todo es modular, lo que hace que sea mas facil de mantener y escalable.
-Se opto para visualizar los diagramas la biblioteca recharts ya qu es comoda y facil de usar.
-Por preferencia se uso css puro y no alguna herramienta externa para validar conceptos y aplicaicon de estilos.
+Se opto para visualizar los diagramas la biblioteca recharts ya que es comoda y facil de usar.
+Por preferencia se uso css puro y no alguna herramienta externa para validar conceptos y aplicacion de estilos.
 Para las peticiones de uso fetch por su facilidad y que es integrado de ts.
+
 
 
