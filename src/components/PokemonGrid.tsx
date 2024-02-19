@@ -66,13 +66,17 @@ const PokemonGrid: React.FC = () => {
     }, [isLoading, hasMore]);
 
     return (
-        <div className="pokemon-grid">
-            {pokemonList.map((pokemon, index) => (
-                <PokemonCard key={`${pokemon.id}-${index}`} pokemon={pokemon} />
-            ))}
+        <div>
+            <h1>POKEMON LIST</h1>
+            <div className="pokemon-grid">
+                {pokemonList.map((pokemon, index) => (
+                    <PokemonCard key={`${pokemon.id}-${index}`} pokemon={pokemon} />
+                ))}
 
-            {isLoading && <div>Loading...</div>}
+                {isLoading && <div>Loading...</div>}
+            </div>
         </div>
+
     );
 };
 
