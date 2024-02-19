@@ -61,19 +61,20 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
             console.log('Name:', pokemonState.name);
             if (details) {
                 console.log('Base experience:', details.base_experience);
-                console.log('Height:', details.height);
+                /* console.log('Height:', details.height);
                 console.log('Number:', details.id);
                 console.log('Weight:', details.weight);
-                console.log('Image URL:', details.sprites.front_default);
+                console.log('Image URL:', details.sprites.front_default); */
             }
             if (locationData) {
-                console.log('Region:', locationData.regionName);
-                console.log('Areas:', locationData.areas.join(', '));
+                /* console.log('Region:', locationData.regionName);
+                console.log('Areas:', locationData.areas.join(', ')); */
                 setLocationData(locationData);
             }
             togglePopup();
         } catch (error) {
             console.error('Error al obtener la información:', error);
+            alert('Ubicación no disponible')
         }
     }
 

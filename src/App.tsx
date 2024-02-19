@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <PokemonStats />
-      <PokemonGrid />
+      <PokemonGrid selectedType={null} />
     </div>
   );
 }
