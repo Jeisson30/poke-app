@@ -24,7 +24,7 @@ const typeColors: TypeColors = {
 };
 
 function generateGradient(color1: string, color2: string): string {
-    return `linear-gradient(to bottom, ${color1}, ${color2})`;
+    return `linear-gradient(to top, ${color1}, ${color2})`;
 }
 
 const typesWithGradients: string[][] = [

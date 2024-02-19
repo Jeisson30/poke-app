@@ -2,9 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 155px;
     padding: 10px;
+    padding-right: 2px;
     margin-bottom: 10px;
-    border-radius: 15px;
+    border-radius: 18px;
+    box-shadow: 1px 1px 3px #000;
+    cursor: pointer;
 }
 
 .pokemon-info {

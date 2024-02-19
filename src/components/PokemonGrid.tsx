@@ -7,6 +7,8 @@ interface Pokemon {
     name: string;
     image: string;
     types: { type: { name: string } }[];
+    locations?: any[];
+    region?: { name: string };
 }
 
 const PokemonGrid: React.FC = () => {

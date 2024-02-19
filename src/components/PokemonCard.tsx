@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/pokemonCard.css'
 import typeColors from './typeColors';
-import { fetchPokemonDetails } from '../services/PokeApiService';
+import { fetchPokemonDetails, fetchPokemonLocations } from '../services/PokeApiService';
+import Popup from './Popup';
 
 interface Pokemon {
     id: number;
     name: string;
     image: string;
     types: { type: { name: string } }[];
+    locations?: any[];
+    region?: { name: string };
 }
 
 interface PokemonCardProps {
@@ -16,6 +19,9 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
     const [details, setDetails] = useState<any>(null);
+    const [pokemonState] = useState<Pokemon>(pokemon);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [locationData, setLocationData] = useState<any>({ regionName: '', areas: [] });
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -30,6 +36,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         fetchDetails();
     }, [pokemon.id]);
 
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
+
     if (!details) {
         return (
             <div className="pokemon-card">
@@ -41,9 +55,31 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         );
     }
 
+    const selectedPokemon = async () => {
+        try {
+            const locationData = await fetchPokemonLocations(pokemonState.id);
+            console.log('Name:', pokemonState.name);
+            if (details) {
+                console.log('Base experience:', details.base_experience);
+                console.log('Height:', details.height);
+                console.log('Number:', details.id);
+                console.log('Weight:', details.weight);
+                console.log('Image URL:', details.sprites.front_default);
+            }
+            if (locationData) {
+                console.log('Region:', locationData.regionName);
+                console.log('Areas:', locationData.areas.join(', '));
+                setLocationData(locationData);
+            }
+            togglePopup();
+        } catch (error) {
+            console.error('Error al obtener la información:', error);
+        }
+    }
+
     const typeNames = details.types.map((type: { type: { name: string; }; }) => type.type.name.toLowerCase());
 
-    // Generar el degradado para el fondo de la tarjeta de acuerdo al tipo del Pokemon
+    // Genera el degradado para el fondo de la tarjeta de acuerdo al tipo del Pokemon
     let gradientBackground = '';
     if (typeNames.length === 1) {
         gradientBackground = typeColors[typeNames[0]];
@@ -52,7 +88,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
     }
 
     return (
-        <div className="pokemon-card" style={{ background: gradientBackground }} >
+        <div className="pokemon-card" style={{ background: gradientBackground }} onClick={selectedPokemon}>
             <div className="pokemon-info">
                 <h2 className='name-pokemon'>{pokemon.name}</h2>
                 <p className='data-pokemon'>Height: {details.height}</p>
@@ -70,9 +106,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
                 </div>
             </div>
             <img className='img-pokemon' src={pokemon.image} alt={pokemon.name} />
+            {showPopup && <Popup pokemon={pokemon} details={details} locationData={locationData} onClose={handleClosePopup} />}
         </div>
     );
 };
-
 
 export default PokemonCard;
