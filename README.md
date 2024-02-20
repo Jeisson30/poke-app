@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# PRUEBA POKE-APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Requerimientos basicos:
 
-## Available Scripts
+Es importante que tenga nodeJS instalado es su maquina local para  poder correr el proyecto. 
+El proyecto usa version de node 18.17.0, con el paquete npm instalado por defecto si tiene nodejs puede cambiar a distintas versiones de node con el comando: 
 
-In the project directory, you can run:
+nvm use (version-node) - nvm use 18.17.0 o puede instalarla con nvm install 18.17.0
 
-### `npm start`
+El proyecto esta en repositorio GitHub y se trabaja bajo el metodo de trabajo gitFlow, se trabajo en la rama develop y una vez se realizaban commits donde las funcionalidades del proyecto eran satisfactorias se hacia el push a develop y posteriormente se realizó un PR a la rama principal main. Esto con el objetivo de tener un orden de trabajo en desarrollo.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Repositorio:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://github.com/Jeisson30/poke-app
 
-### `npm test`
+clone el proyecto desde la rama principal main.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git clone -b main nombre_rama link_repo
 
-### `npm run build`
+Cuando el proyecto termine de clonar satisfactoriamente, porfavor se sugiere que ponga la version de node 18.17.0
+recuerde en la seccion mas arriba como instalar y colocar la version de node para este proyecto.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+una vez tenga la version node por favor verifique que se encuentre dentro de la carpeta raiz y verifique la version de node con el siguiente comando:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+node -v
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+en la terminal debera visualizar:
+v18.17.0
 
-### `npm run eject`
+de lo contrario por favor digite 
+nvm use 18.17.0
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+luego instale dependencias, esto es fundamental para la ejecucion del proyecto:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install ,
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+si por alguna razon se presenta un error, se debe mirar mas a fondo algun conflicto de dependencias pero para visualizar el proyecto ejecute
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+npm install --legacy-peer-deps
 
-## Learn More
+una vez  que las dependecias esten descargadas proceda a correr el proyecto dentro de la carpeta raiz, en este caso poke-app:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm start.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Esta configurado para correr en local y podra explorar los requerimientos del desarrollo.
+
+Algunas de las funcionalidades que encontrara:
+
+Se conecta a la api pokeApi
+Lista de todos los pokemon con informacion relevante, tipo o tipos y colores de acerdo a su tipo.
+La lista contiene mas de los mil pokemon que contiene, el scroll es vertical y a medida que baja se ira cargando la información con nuevos pokemon dinamicamente.
+POPup al seleccionar un pokemon, encontrara ademas informacion del area donde se encuentra para capturarlo.
+Diagramas para visualizar que cantidad de pokemon hay por cada tipo.
+
+Filtrado por tipo de acuerdo a los diagramas en fase de desarrollo. 
+
+Se realizo una arquitectura limpia, donde todo es modular, lo que hace que sea mas facil de mantener y escalable.
+Se opto para visualizar los diagramas la biblioteca recharts ya que es comoda y facil de usar.
+Por preferencia se uso css puro y no alguna herramienta externa para validar conceptos y aplicacion de estilos.
+Para las peticiones se uso fetch por su facilidad y que es integrado de ts.
+
+
+Jeisson Pulido Barreto

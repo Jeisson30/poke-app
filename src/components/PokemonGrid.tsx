@@ -11,7 +11,11 @@ interface Pokemon {
     region?: { name: string };
 }
 
-const PokemonGrid: React.FC = () => {
+interface PokemonGridProps {
+    selectedType: string | null;
+}
+
+const PokemonGrid: React.FC<PokemonGridProps> = ({ selectedType }) => {
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
@@ -19,7 +23,9 @@ const PokemonGrid: React.FC = () => {
 
     useEffect(() => {
         fetchPokemonsData();
-    }, [page]);
+        console.log('seleccion tipo: ', selectedType);
+
+    }, [page, selectedType]);
 
     const fetchPokemonsData = async () => {
         setIsLoading(true);
@@ -32,12 +38,22 @@ const PokemonGrid: React.FC = () => {
                 return;
             }
 
-            const newPokemonList = data.results.map((pokemon: any, index: number) => ({
+            let newPokemonList = data.results.map((pokemon: any, index: number) => ({
                 id: (nextPage - 1) * 30 + index + 1,
                 name: pokemon.name,
                 image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${(nextPage - 1) * 30 + index + 1}.png`,
                 types: []
             }));
+
+            // Filtrar por tipo seleccionado
+            console.log('Tipo seleccionado:', selectedType);
+            if (selectedType) {
+                newPokemonList = newPokemonList.filter((pokemon: { types: { type: { name: string; }; }[]; }) =>
+                    pokemon.types.some((type: { type: { name: string; }; }) => type.type.name === selectedType)
+                );
+                console.log('filtrado tipo: ', newPokemonList);
+
+            }
 
             if (nextPage === 1) {
                 setPokemonList(newPokemonList);
